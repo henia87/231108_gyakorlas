@@ -1,4 +1,4 @@
-//Eldöntés
+//Eldöntés: van-e negatív szám a tömbben
 
 function negativVanE(szamok:number[]):boolean{
     var i:number = 0;
@@ -18,8 +18,8 @@ function negativTabla(bemenet:number[], kimenet:boolean):void{
     var td1 = document.createElement("td");
     var td2 = document.createElement("td");
     td1.innerHTML = bemenet.toString();
-    var eredmeny = negativVanE(bemenet).toString();
-    td2.appendChild(document.createTextNode(eredmeny));
+    var td2Szoveg = document.createTextNode(negativVanE(bemenet) ? "igen" : "nem");
+    td2.appendChild(td2Szoveg);
     tr.appendChild(td1);
     tr.appendChild(td2);
     negativTabla?.appendChild(tr);
@@ -64,3 +64,74 @@ interface Auto {
     hengerurtartalom:number,
     benzinesE:boolean
 }
+
+var autok:Auto[] = [
+    {
+        gyarto: "Skoda",
+        tipus: "Octavia",
+        hengerurtartalom: 1800,
+        benzinesE: true
+    },
+    {
+        gyarto: "Ford",
+        tipus: "Mondeo",
+        hengerurtartalom: 1997,
+        benzinesE: false
+    },
+    {
+        gyarto: "Suzuki",
+        tipus: "Swift",
+        hengerurtartalom: 1300,
+        benzinesE: true
+    },
+    {
+        gyarto: "BWM",
+        tipus: "i8",
+        hengerurtartalom: 1500,
+        benzinesE: false
+    },
+    {
+        gyarto: "Subaru",
+        tipus: "XV",
+        hengerurtartalom: 1600,
+        benzinesE: true
+    }
+]
+
+//Auto tömbből legkisebb hengerűrtartalmú Auto
+function legkisebbHengerurt(autoTomb:Auto[]):string{
+    var minAuto:Auto = autoTomb[0];
+
+    for(var i:number = 1; i < autoTomb.length; i++){
+        if(minAuto.hengerurtartalom > autoTomb[i].hengerurtartalom){
+            minAuto = autoTomb[i];
+        }
+    }
+    return minAuto.gyarto + " " + minAuto.tipus + " (" + minAuto.hengerurtartalom + ")" + " ccm";
+}
+
+function legkisebbHengerurtKiiras(){
+    var pMin = document.getElementById("legkisebbHengerurt");
+    pMin.innerHTML = `<b>A legkisebb hengerűrtartalmú autó:</b> ${legkisebbHengerurt(autok)}`;
+}
+
+legkisebbHengerurtKiiras();
+
+//Auto tömbből benzinesek darabszáma
+function benzinesDb(autoTomb:Auto[]):number{
+    var db:number = 0;
+
+    for(var i:number = 0; i < autoTomb.length; i++){
+        if(autoTomb[i].benzinesE == true){
+            db++;
+        }
+    }
+    return db;
+}
+
+function benzinesDbKiiras(){
+    var pBenzin = document.getElementById("benzinesDb");
+    pBenzin.innerHTML = `<b>A benzines autók száma:</b> ${benzinesDb(autok)}`;
+}
+
+benzinesDbKiiras();
