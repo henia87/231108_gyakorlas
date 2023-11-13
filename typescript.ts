@@ -136,15 +136,6 @@ function benzinesDbKiiras(){
 
 benzinesDbKiiras();
 
-/*
--	Készíts alprogramot, amely…
-    o	Egy auto tömbből megadja az átlag hengerűrtartalmat.
-    o	Eldönti, hogy van-e nem benzines auto az autok tömbben.
-    o	Szétválogatja a benzines és nem benzines autókat.
--	A változtatásokat töltsd fel a GitHub repódba.
-
-*/
-
 //Átlag - hengerűrtartalom
 
 function atlagCcm(autoTomb:Auto[]):number{
