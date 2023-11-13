@@ -66,7 +66,7 @@ var autok = [
         benzinesE: true
     },
     {
-        gyarto: "BWM",
+        gyarto: "BMW",
         tipus: "i8",
         hengerurtartalom: 1500,
         benzinesE: false
@@ -90,7 +90,7 @@ function legkisebbHengerurt(autoTomb) {
 }
 function legkisebbHengerurtKiiras() {
     var pMin = document.getElementById("legkisebbHengerurt");
-    pMin.innerHTML = "<b>A legkisebb henger\u0171rtartalm\u00FA aut\u00F3:</b> ".concat(legkisebbHengerurt(autok));
+    pMin.innerHTML = "<b>A legkisebb henger\u0171rtartalm\u00FA aut\u00F3:</b><br />".concat(legkisebbHengerurt(autok));
 }
 legkisebbHengerurtKiiras();
 //Auto tömbből benzinesek darabszáma
@@ -105,6 +105,74 @@ function benzinesDb(autoTomb) {
 }
 function benzinesDbKiiras() {
     var pBenzin = document.getElementById("benzinesDb");
-    pBenzin.innerHTML = "<b>A benzines aut\u00F3k sz\u00E1ma:</b> ".concat(benzinesDb(autok));
+    pBenzin.innerHTML = "<b>A benzines aut\u00F3k sz\u00E1ma:</b><br />".concat(benzinesDb(autok));
 }
 benzinesDbKiiras();
+/*
+-	Készíts alprogramot, amely…
+    o	Egy auto tömbből megadja az átlag hengerűrtartalmat.
+    o	Eldönti, hogy van-e nem benzines auto az autok tömbben.
+    o	Szétválogatja a benzines és nem benzines autókat.
+-	A változtatásokat töltsd fel a GitHub repódba.
+
+*/
+//Átlag - hengerűrtartalom
+function atlagCcm(autoTomb) {
+    var atlag = 0;
+    for (var i = 0; i < autoTomb.length; i++) {
+        atlag += autoTomb[i].hengerurtartalom;
+    }
+    atlag /= autoTomb.length;
+    return atlag;
+}
+function atlagKiiras() {
+    var pAtlag = document.getElementById("atlagCcm");
+    pAtlag.innerHTML = "<b>Az aut\u00F3k henger\u0171rtartalm\u00E1nak \u00E1tlaga:</b><br />".concat(atlagCcm(autok));
+}
+atlagKiiras();
+//Van benzines? - eldöntés
+function benzinesVanE(autoTomb) {
+    var ind = 0;
+    var bool = false;
+    while (ind < autoTomb.length && !(autoTomb[ind].benzinesE == true)) {
+        ind++;
+    }
+    bool = ind < autoTomb.length;
+    return bool;
+}
+function benzinesVanEKiiras() {
+    var pBenzinesVanE = document.getElementById("benzinesVanE");
+    pBenzinesVanE.innerHTML = "<b>Van benzines aut\u00F3? </b><br />".concat(benzinesVanE(autok) ? 'Van' : 'Nincs');
+}
+benzinesVanEKiiras();
+//Benzines - nem benzines szétválogatás
+function benzinNemBenzinSzetval(autoTomb) {
+    var benzinesTomb = [];
+    var nemBenzinesTomb = [];
+    for (var i = 0; i < autoTomb.length; i++) {
+        if (autoTomb[i].benzinesE == true) {
+            benzinesTomb.push(autoTomb[i]);
+        }
+        else {
+            nemBenzinesTomb.push(autoTomb[i]);
+        }
+    }
+    return [benzinesTomb, nemBenzinesTomb];
+}
+console.log(benzinNemBenzinSzetval(autok));
+function benzinNemBenzinSzetvalKiiras() {
+    var eredmeny = benzinNemBenzinSzetval(autok);
+    var benzinesek = document.getElementById("benzinesek");
+    var nemBenzinesek = document.getElementById("nemBenzinesek");
+    for (var i = 0; i < eredmeny[0].length; i++) {
+        var liBenzin = document.createElement("li");
+        liBenzin.innerHTML = "\n            <b>Gy\u00E1rt\u00F3:</b> ".concat(eredmeny[0][i].gyarto, "<br />\n            <b>T\u00EDpus:</b> ").concat(eredmeny[0][i].tipus, "<br />\n            <b>Henger\u0171rtartalom:</b> ").concat(eredmeny[0][i].hengerurtartalom, " ccm<br />\n            <b>Benzines:</b> ").concat(eredmeny[0][i].benzinesE ? "igen" : "nem", "<br />\n            ");
+        benzinesek.appendChild(liBenzin);
+    }
+    for (var j = 0; j < eredmeny[1].length; j++) {
+        var liNemBenzin = document.createElement("li");
+        liNemBenzin.innerHTML = "\n            <b>Gy\u00E1rt\u00F3:</b> ".concat(eredmeny[1][j].gyarto, "<br />\n            <b>T\u00EDpus:</b> ").concat(eredmeny[1][j].tipus, "<br />\n            <b>Henger\u0171rtartalom:</b> ").concat(eredmeny[1][j].hengerurtartalom, " ccm<br />\n            <b>Benzines:</b> ").concat(eredmeny[1][j].benzinesE ? "igen" : "nem", "<br />\n            ");
+        nemBenzinesek.appendChild(liNemBenzin);
+    }
+}
+benzinNemBenzinSzetvalKiiras();

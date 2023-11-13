@@ -85,7 +85,7 @@ var autok:Auto[] = [
         benzinesE: true
     },
     {
-        gyarto: "BWM",
+        gyarto: "BMW",
         tipus: "i8",
         hengerurtartalom: 1500,
         benzinesE: false
@@ -112,7 +112,7 @@ function legkisebbHengerurt(autoTomb:Auto[]):string{
 
 function legkisebbHengerurtKiiras(){
     var pMin = document.getElementById("legkisebbHengerurt");
-    pMin.innerHTML = `<b>A legkisebb hengerűrtartalmú autó:</b> ${legkisebbHengerurt(autok)}`;
+    pMin.innerHTML = `<b>A legkisebb hengerűrtartalmú autó:</b><br />${legkisebbHengerurt(autok)}`;
 }
 
 legkisebbHengerurtKiiras();
@@ -131,7 +131,107 @@ function benzinesDb(autoTomb:Auto[]):number{
 
 function benzinesDbKiiras(){
     var pBenzin = document.getElementById("benzinesDb");
-    pBenzin.innerHTML = `<b>A benzines autók száma:</b> ${benzinesDb(autok)}`;
+    pBenzin.innerHTML = `<b>A benzines autók száma:</b><br />${benzinesDb(autok)}`;
 }
 
 benzinesDbKiiras();
+
+/*
+-	Készíts alprogramot, amely…
+    o	Egy auto tömbből megadja az átlag hengerűrtartalmat.
+    o	Eldönti, hogy van-e nem benzines auto az autok tömbben.
+    o	Szétválogatja a benzines és nem benzines autókat.
+-	A változtatásokat töltsd fel a GitHub repódba.
+
+*/
+
+//Átlag - hengerűrtartalom
+
+function atlagCcm(autoTomb:Auto[]):number{
+    var atlag:number = 0;
+
+    for(var i:number = 0; i < autoTomb.length; i++){
+        atlag += autoTomb[i].hengerurtartalom;
+    }
+    atlag /= autoTomb.length;
+
+    return atlag;
+}
+
+function atlagKiiras(){
+    var pAtlag = document.getElementById("atlagCcm");
+    pAtlag.innerHTML = `<b>Az autók hengerűrtartalmának átlaga:</b><br />${atlagCcm(autok)}`;
+}
+
+atlagKiiras();
+
+//Van benzines? - eldöntés
+
+function benzinesVanE(autoTomb:Auto[]):boolean{
+    var ind:number = 0;
+    var bool:boolean = false;
+
+    while(ind < autoTomb.length && !(autoTomb[ind].benzinesE == true)){
+        ind++;
+    }
+    bool = ind < autoTomb.length;
+
+    return bool;
+}
+
+function benzinesVanEKiiras(){
+    var pBenzinesVanE = document.getElementById("benzinesVanE");
+    pBenzinesVanE.innerHTML = `<b>Van benzines autó? </b><br />${benzinesVanE(autok) ? 'Van' : 'Nincs'}`;
+}
+
+benzinesVanEKiiras();
+
+//Benzines - nem benzines szétválogatás
+
+function benzinNemBenzinSzetval(autoTomb:Auto[]):[autoTombA:Auto[], autoTombB:Auto[]]{
+    var benzinesTomb:Auto[] = [];
+    var nemBenzinesTomb:Auto[] = [];
+    
+    for(var i:number = 0; i < autoTomb.length; i++){
+        if(autoTomb[i].benzinesE == true){
+            benzinesTomb.push(autoTomb[i]);
+        }
+        else{
+            nemBenzinesTomb.push(autoTomb[i]);
+        }
+    }
+    return [benzinesTomb, nemBenzinesTomb];
+}
+
+console.log(benzinNemBenzinSzetval(autok));
+
+function benzinNemBenzinSzetvalKiiras(){
+    var eredmeny:[Auto[], Auto[]] = benzinNemBenzinSzetval(autok);
+    
+    var benzinesek = document.getElementById("benzinesek");
+    var nemBenzinesek = document.getElementById("nemBenzinesek");
+
+    for(var i:number = 0; i < eredmeny[0].length; i++){
+        var liBenzin:HTMLLIElement = document.createElement("li");
+        liBenzin.innerHTML = `
+            <b>Gyártó:</b> ${eredmeny[0][i].gyarto}<br />
+            <b>Típus:</b> ${eredmeny[0][i].tipus}<br />
+            <b>Hengerűrtartalom:</b> ${eredmeny[0][i].hengerurtartalom} ccm<br />
+            <b>Benzines:</b> ${eredmeny[0][i].benzinesE ? "igen" : "nem"}<br />
+            `;
+        benzinesek.appendChild(liBenzin);
+    }
+
+    for(var j:number = 0; j < eredmeny[1].length; j++){
+        var liNemBenzin:HTMLLIElement = document.createElement("li");
+        liNemBenzin.innerHTML = `
+            <b>Gyártó:</b> ${eredmeny[1][j].gyarto}<br />
+            <b>Típus:</b> ${eredmeny[1][j].tipus}<br />
+            <b>Hengerűrtartalom:</b> ${eredmeny[1][j].hengerurtartalom} ccm<br />
+            <b>Benzines:</b> ${eredmeny[1][j].benzinesE ? "igen" : "nem"}<br />
+            `;
+        nemBenzinesek.appendChild(liNemBenzin);
+    }
+}
+
+benzinNemBenzinSzetvalKiiras();
