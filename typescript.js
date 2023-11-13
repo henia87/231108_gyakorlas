@@ -8,7 +8,7 @@ function negativVanE(szamok) {
 }
 /* console.log(negativVanE([4, 6, 1213, 123, -5, 976]));
 console.log(negativVanE([4, 6, 1213, 123, 976])); */
-function negativTabla(bemenet, kimenet) {
+function negativTabla(bemenet) {
     var negativTabla = document.getElementById("negativTabla");
     var tr = document.createElement("tr");
     var td1 = document.createElement("td");
@@ -20,8 +20,8 @@ function negativTabla(bemenet, kimenet) {
     tr.appendChild(td2);
     negativTabla === null || negativTabla === void 0 ? void 0 : negativTabla.appendChild(tr);
 }
-negativTabla([4, 6, 1213, 123, -5, 976], negativVanE([4, 6, 1213, 123, -5, 976]));
-negativTabla([4, 6, 1213, 123, 976], negativVanE([4, 6, 1213, 123, 976]));
+negativTabla([4, 6, 1213, 123, -5, 976]);
+negativTabla([4, 6, 1213, 123, 976]);
 //Kör kerülete, területe tuple-lel
 function korKeruletTerulet(sugar) {
     var kerulet = 2 * sugar * Math.PI;
@@ -29,23 +29,23 @@ function korKeruletTerulet(sugar) {
     return [kerulet, terulet];
 }
 //console.log(korKeruletTerulet(4));
-function kerTerTabla(bemenet, kimenet) {
+function kerTerTabla(bemenet) {
     var kerTerTabla = document.getElementById("kerTerTabla");
     var tr = document.createElement("tr");
     var td1 = document.createElement("td");
     var td2 = document.createElement("td");
     var td3 = document.createElement("td");
     td1.innerHTML = bemenet.toString();
-    td2.innerHTML = kimenet[0].toString();
-    td3.innerHTML = kimenet[1].toString();
+    td2.innerHTML = korKeruletTerulet(bemenet)[0].toString();
+    td3.innerHTML = korKeruletTerulet(bemenet)[1].toString();
     tr.appendChild(td1);
     tr.appendChild(td2);
     tr.appendChild(td3);
     kerTerTabla === null || kerTerTabla === void 0 ? void 0 : kerTerTabla.appendChild(tr);
 }
-kerTerTabla(3, korKeruletTerulet(3));
-kerTerTabla(4, korKeruletTerulet(4));
-kerTerTabla(5, korKeruletTerulet(5));
+kerTerTabla(3);
+kerTerTabla(4);
+kerTerTabla(5);
 var autok = [
     {
         gyarto: "Skoda",
@@ -86,7 +86,7 @@ function legkisebbHengerurt(autoTomb) {
             minAuto = autoTomb[i];
         }
     }
-    return minAuto.gyarto + " " + minAuto.tipus + " (" + minAuto.hengerurtartalom + ")" + " ccm";
+    return minAuto.gyarto + " " + minAuto.tipus + " (" + minAuto.hengerurtartalom + " ccm)";
 }
 function legkisebbHengerurtKiiras() {
     var pMin = document.getElementById("legkisebbHengerurt");
@@ -108,14 +108,6 @@ function benzinesDbKiiras() {
     pBenzin.innerHTML = "<b>A benzines aut\u00F3k sz\u00E1ma:</b><br />".concat(benzinesDb(autok));
 }
 benzinesDbKiiras();
-/*
--	Készíts alprogramot, amely…
-    o	Egy auto tömbből megadja az átlag hengerűrtartalmat.
-    o	Eldönti, hogy van-e nem benzines auto az autok tömbben.
-    o	Szétválogatja a benzines és nem benzines autókat.
--	A változtatásokat töltsd fel a GitHub repódba.
-
-*/
 //Átlag - hengerűrtartalom
 function atlagCcm(autoTomb) {
     var atlag = 0;

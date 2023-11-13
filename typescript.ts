@@ -12,7 +12,7 @@ function negativVanE(szamok:number[]):boolean{
 /* console.log(negativVanE([4, 6, 1213, 123, -5, 976]));
 console.log(negativVanE([4, 6, 1213, 123, 976])); */
 
-function negativTabla(bemenet:number[], kimenet:boolean):void{
+function negativTabla(bemenet:number[]):void{
     var negativTabla = document.getElementById("negativTabla");
     var tr = document.createElement("tr");
     var td1 = document.createElement("td");
@@ -24,8 +24,8 @@ function negativTabla(bemenet:number[], kimenet:boolean):void{
     tr.appendChild(td2);
     negativTabla?.appendChild(tr);
 }
-negativTabla([4, 6, 1213, 123, -5, 976], negativVanE([4, 6, 1213, 123, -5, 976]));
-negativTabla([4, 6, 1213, 123, 976], negativVanE([4, 6, 1213, 123, 976]));
+negativTabla([4, 6, 1213, 123, -5, 976]);
+negativTabla([4, 6, 1213, 123, 976]);
 
 //Kör kerülete, területe tuple-lel
 
@@ -38,24 +38,24 @@ function korKeruletTerulet(sugar:number):[number, number]{
 
 //console.log(korKeruletTerulet(4));
 
-function kerTerTabla(bemenet:number, kimenet:[number, number]){
+function kerTerTabla(bemenet:number){
     var kerTerTabla = document.getElementById("kerTerTabla");
     var tr = document.createElement("tr");
     var td1 = document.createElement("td");
     var td2 = document.createElement("td");
     var td3 = document.createElement("td");
     td1.innerHTML = bemenet.toString();
-    td2.innerHTML = kimenet[0].toString();
-    td3.innerHTML = kimenet[1].toString();
+    td2.innerHTML = korKeruletTerulet(bemenet)[0].toString();
+    td3.innerHTML = korKeruletTerulet(bemenet)[1].toString();
     tr.appendChild(td1);
     tr.appendChild(td2);
     tr.appendChild(td3);
     kerTerTabla?.appendChild(tr);
 }
 
-kerTerTabla(3, korKeruletTerulet(3));
-kerTerTabla(4, korKeruletTerulet(4));
-kerTerTabla(5, korKeruletTerulet(5));
+kerTerTabla(3);
+kerTerTabla(4);
+kerTerTabla(5);
 
 //Auto interfész
 interface Auto {
@@ -107,11 +107,11 @@ function legkisebbHengerurt(autoTomb:Auto[]):string{
             minAuto = autoTomb[i];
         }
     }
-    return minAuto.gyarto + " " + minAuto.tipus + " (" + minAuto.hengerurtartalom + ")" + " ccm";
+    return minAuto.gyarto + " " + minAuto.tipus + " (" + minAuto.hengerurtartalom + " ccm)";
 }
 
 function legkisebbHengerurtKiiras(){
-    var pMin = document.getElementById("legkisebbHengerurt");
+    var pMin:HTMLParagraphElement = document.getElementById("legkisebbHengerurt") as HTMLParagraphElement;
     pMin.innerHTML = `<b>A legkisebb hengerűrtartalmú autó:</b><br />${legkisebbHengerurt(autok)}`;
 }
 
@@ -130,7 +130,7 @@ function benzinesDb(autoTomb:Auto[]):number{
 }
 
 function benzinesDbKiiras(){
-    var pBenzin = document.getElementById("benzinesDb");
+    var pBenzin:HTMLParagraphElement = document.getElementById("benzinesDb") as HTMLParagraphElement;
     pBenzin.innerHTML = `<b>A benzines autók száma:</b><br />${benzinesDb(autok)}`;
 }
 
@@ -150,7 +150,7 @@ function atlagCcm(autoTomb:Auto[]):number{
 }
 
 function atlagKiiras(){
-    var pAtlag = document.getElementById("atlagCcm");
+    var pAtlag:HTMLParagraphElement = document.getElementById("atlagCcm") as HTMLParagraphElement;
     pAtlag.innerHTML = `<b>Az autók hengerűrtartalmának átlaga:</b><br />${atlagCcm(autok)}`;
 }
 
@@ -171,7 +171,7 @@ function benzinesVanE(autoTomb:Auto[]):boolean{
 }
 
 function benzinesVanEKiiras(){
-    var pBenzinesVanE = document.getElementById("benzinesVanE");
+    var pBenzinesVanE:HTMLParagraphElement = document.getElementById("benzinesVanE") as HTMLParagraphElement;
     pBenzinesVanE.innerHTML = `<b>Van benzines autó? </b><br />${benzinesVanE(autok) ? 'Van' : 'Nincs'}`;
 }
 
@@ -199,8 +199,8 @@ console.log(benzinNemBenzinSzetval(autok));
 function benzinNemBenzinSzetvalKiiras(){
     var eredmeny:[Auto[], Auto[]] = benzinNemBenzinSzetval(autok);
     
-    var benzinesek = document.getElementById("benzinesek");
-    var nemBenzinesek = document.getElementById("nemBenzinesek");
+    var benzinesek:HTMLUListElement = document.getElementById("benzinesek") as HTMLUListElement;
+    var nemBenzinesek:HTMLUListElement = document.getElementById("nemBenzinesek") as HTMLUListElement;
 
     for(var i:number = 0; i < eredmeny[0].length; i++){
         var liBenzin:HTMLLIElement = document.createElement("li");
