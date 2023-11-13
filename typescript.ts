@@ -24,6 +24,7 @@ function negativTabla(bemenet:number[]):void{
     tr.appendChild(td2);
     negativTabla?.appendChild(tr);
 }
+
 negativTabla([4, 6, 1213, 123, -5, 976]);
 negativTabla([4, 6, 1213, 123, 976]);
 
@@ -38,7 +39,7 @@ function korKeruletTerulet(sugar:number):[number, number]{
 
 //console.log(korKeruletTerulet(4));
 
-function kerTerTabla(bemenet:number){
+function kerTerTabla(bemenet:number):void{
     var kerTerTabla = document.getElementById("kerTerTabla");
     var tr = document.createElement("tr");
     var td1 = document.createElement("td");
@@ -110,7 +111,7 @@ function legkisebbHengerurt(autoTomb:Auto[]):string{
     return minAuto.gyarto + " " + minAuto.tipus + " (" + minAuto.hengerurtartalom + " ccm)";
 }
 
-function legkisebbHengerurtKiiras(){
+function legkisebbHengerurtKiiras():void{
     var pMin:HTMLParagraphElement = document.getElementById("legkisebbHengerurt") as HTMLParagraphElement;
     pMin.innerHTML = `<b>A legkisebb hengerűrtartalmú autó:</b><br />${legkisebbHengerurt(autok)}`;
 }
@@ -129,7 +130,7 @@ function benzinesDb(autoTomb:Auto[]):number{
     return db;
 }
 
-function benzinesDbKiiras(){
+function benzinesDbKiiras():void{
     var pBenzin:HTMLParagraphElement = document.getElementById("benzinesDb") as HTMLParagraphElement;
     pBenzin.innerHTML = `<b>A benzines autók száma:</b><br />${benzinesDb(autok)}`;
 }
@@ -149,7 +150,7 @@ function atlagCcm(autoTomb:Auto[]):number{
     return atlag;
 }
 
-function atlagKiiras(){
+function atlagKiiras():void{
     var pAtlag:HTMLParagraphElement = document.getElementById("atlagCcm") as HTMLParagraphElement;
     pAtlag.innerHTML = `<b>Az autók hengerűrtartalmának átlaga:</b><br />${atlagCcm(autok)}`;
 }
@@ -170,7 +171,7 @@ function benzinesVanE(autoTomb:Auto[]):boolean{
     return bool;
 }
 
-function benzinesVanEKiiras(){
+function benzinesVanEKiiras():void{
     var pBenzinesVanE:HTMLParagraphElement = document.getElementById("benzinesVanE") as HTMLParagraphElement;
     pBenzinesVanE.innerHTML = `<b>Van benzines autó? </b><br />${benzinesVanE(autok) ? 'Van' : 'Nincs'}`;
 }
@@ -194,9 +195,7 @@ function benzinNemBenzinSzetval(autoTomb:Auto[]):[autoTombA:Auto[], autoTombB:Au
     return [benzinesTomb, nemBenzinesTomb];
 }
 
-console.log(benzinNemBenzinSzetval(autok));
-
-function benzinNemBenzinSzetvalKiiras(){
+function benzinNemBenzinSzetvalKiiras():void{
     var eredmeny:[Auto[], Auto[]] = benzinNemBenzinSzetval(autok);
     
     var benzinesek:HTMLUListElement = document.getElementById("benzinesek") as HTMLUListElement;

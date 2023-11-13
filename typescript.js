@@ -151,7 +151,6 @@ function benzinNemBenzinSzetval(autoTomb) {
     }
     return [benzinesTomb, nemBenzinesTomb];
 }
-console.log(benzinNemBenzinSzetval(autok));
 function benzinNemBenzinSzetvalKiiras() {
     var eredmeny = benzinNemBenzinSzetval(autok);
     var benzinesek = document.getElementById("benzinesek");
