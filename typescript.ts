@@ -159,28 +159,26 @@ atlagKiiras();
 
 //Van benzines? - eldöntés
 
-function benzinesVanE(autoTomb:Auto[]):boolean{
+function nemBenzinesVanE(autoTomb:Auto[]):boolean{
     var ind:number = 0;
-    var bool:boolean = false;
 
-    while(ind < autoTomb.length && !(autoTomb[ind].benzinesE == true)){
+    while(ind < autoTomb.length && !(autoTomb[ind].benzinesE == false)){
         ind++;
     }
-    bool = ind < autoTomb.length;
 
-    return bool;
+    return ind < autoTomb.length;
 }
 
-function benzinesVanEKiiras():void{
-    var pBenzinesVanE:HTMLParagraphElement = document.getElementById("benzinesVanE") as HTMLParagraphElement;
-    pBenzinesVanE.innerHTML = `<b>Van benzines autó? </b><br />${benzinesVanE(autok) ? 'Van' : 'Nincs'}`;
+function nemBenzinesVanEKiiras():void{
+    var pBenzinesVanE:HTMLParagraphElement = document.getElementById("nemBenzinesVanE") as HTMLParagraphElement;
+    pBenzinesVanE.innerHTML = `<b>Van nem benzines autó? </b><br />${nemBenzinesVanE(autok) ? 'Van' : 'Nincs'}`;
 }
 
-benzinesVanEKiiras();
+nemBenzinesVanEKiiras();
 
 //Benzines - nem benzines szétválogatás
 
-function benzinNemBenzinSzetval(autoTomb:Auto[]):[autoTombA:Auto[], autoTombB:Auto[]]{
+function benzinNemBenzinSzetval(autoTomb:Auto[]):[Auto[], Auto[]]{
     var benzinesTomb:Auto[] = [];
     var nemBenzinesTomb:Auto[] = [];
     

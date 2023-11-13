@@ -123,20 +123,18 @@ function atlagKiiras() {
 }
 atlagKiiras();
 //Van benzines? - eldöntés
-function benzinesVanE(autoTomb) {
+function nemBenzinesVanE(autoTomb) {
     var ind = 0;
-    var bool = false;
-    while (ind < autoTomb.length && !(autoTomb[ind].benzinesE == true)) {
+    while (ind < autoTomb.length && !(autoTomb[ind].benzinesE == false)) {
         ind++;
     }
-    bool = ind < autoTomb.length;
-    return bool;
+    return ind < autoTomb.length;
 }
-function benzinesVanEKiiras() {
-    var pBenzinesVanE = document.getElementById("benzinesVanE");
-    pBenzinesVanE.innerHTML = "<b>Van benzines aut\u00F3? </b><br />".concat(benzinesVanE(autok) ? 'Van' : 'Nincs');
+function nemBenzinesVanEKiiras() {
+    var pBenzinesVanE = document.getElementById("nemBenzinesVanE");
+    pBenzinesVanE.innerHTML = "<b>Van nem benzines aut\u00F3? </b><br />".concat(nemBenzinesVanE(autok) ? 'Van' : 'Nincs');
 }
-benzinesVanEKiiras();
+nemBenzinesVanEKiiras();
 //Benzines - nem benzines szétválogatás
 function benzinNemBenzinSzetval(autoTomb) {
     var benzinesTomb = [];
